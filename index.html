@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            background: white;
+            padding: 35px;
+            width: 350px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #scare {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: black;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #scare img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box" id="verification">
+    <h2>Xác minh người dùng</h2>
+    <p>Vui lòng xác minh bạn không phải bot.</p>
+
+    <button onclick="verify()">Tôi không phải bot</button>
+</div>
+
+<div id="scare">
+    <img src="scary.jpg">
+
+    <audio id="sound" src="scary.mp3"></audio>
+</div>
+
+<script>
+function verify() {
+    const box = document.getElementById("verification");
+
+    box.innerHTML = `
+        <h2>Đang xác minh...</h2>
+        <p>Vui lòng chờ một chút...</p>
+    `;
+
+    setTimeout(function() {
+        document.getElementById("verification").style.display = "none";
+
+        const scare = document.getElementById("scare");
+        scare.style.display = "flex";
+
+        const sound = document.getElementById("sound");
+        sound.play().catch(() => {});
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
